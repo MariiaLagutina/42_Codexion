@@ -21,7 +21,7 @@ SRCS		=	main.c \
 			threads/join_threads.c \
 			threads/start_threads.c \
 			utils/logger.c \
-			utils/safe_sleep.c \
+			utils/sim_stop.c \
 			utils/time_utils.c \
 			cleanup.c
 
