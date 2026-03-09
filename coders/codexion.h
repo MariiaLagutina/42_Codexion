@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 11:45:24 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/06 22:53:24 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:18:59 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ struct s_sim
 	t_scheduler		scheduler;
 	long			start_time;
 	int				stop;
-	int				stop_simulation;
 	pthread_mutex_t	log_mutex;
 	pthread_mutex_t	stop_mutex;
 	t_coder			*coders;
