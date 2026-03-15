@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 13:09:36 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/06 22:58:25 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/03/14 14:51:03 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,6 @@ void	take_dongles(t_coder *coder)
 	order_dongles(coder, &first, &second);
 	lock_and_wait(coder, first);
 	log_action(coder, "has taken a dongle");
-	if (first == second)
-	{
-		while (!simulation_stopped(coder->sim))
-			usleep(1000);
-		return ;
-	}
 	lock_and_wait(coder, second);
 	log_action(coder, "has taken a dongle");
 }

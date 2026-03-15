@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 11:57:48 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/06 19:46:07 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/03/14 14:56:20 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	validate_values(t_sim *sim)
 		|| sim->time_to_debug <= 0
 		|| sim->time_to_refactor <= 0)
 		return (1);
-	if (sim->required_compiles < -1 || sim->dongle_cooldown < 0)
+	if (sim->required_compiles <= 0 || sim->dongle_cooldown < 0)
 		return (1);
 	return (0);
 }

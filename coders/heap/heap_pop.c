@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 14:18:51 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/06 23:01:30 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/03/14 14:39:49 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ static void	heapify_down(t_heap *heap)
 t_coder	*heap_pop(t_heap *heap)
 {
 	t_coder	*res;
-
+	
+	if (!heap || heap->size == 0)
+    	return (NULL);
 	res = heap->nodes[0].coder;
 	heap->nodes[0] = heap->nodes[--heap->size];
 	heapify_down(heap);

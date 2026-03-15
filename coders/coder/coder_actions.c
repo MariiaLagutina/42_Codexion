@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 12:35:09 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/06 22:56:32 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/03/14 14:56:48 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void	coder_compile(t_coder *coder)
 	if (simulation_stopped(coder->sim))
 		return ;
 	pthread_mutex_lock(&coder->state_mutex);
-	if (coder->sim->required_compiles != -1
-		&& coder->compiles >= coder->sim->required_compiles)
+	if (coder->compiles >= coder->sim->required_compiles)
 	{
 		pthread_mutex_unlock(&coder->state_mutex);
 		return ;

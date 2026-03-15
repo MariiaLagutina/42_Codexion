@@ -43,7 +43,4 @@ fclean: clean
 
 re: fclean all
 
-test: $(NAME)
-	./$(NAME) 2 5000 1000 500 500 2 100 fifo
-
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re 
