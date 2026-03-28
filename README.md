@@ -60,4 +60,5 @@ To ensure liveness and prevent the simulation from halting, several concurrency 
 ## Resources
 
 - **Classic References:** Dijkstra's Philosophers Dining Problem (1965) and Coffman's conditions for deadlock analysis. Real-time scheduling theory for EDF implementation.
-- **AI Usage:** GitHub Copilot provided occasional suggestions during development, primarily helping with code formatting to meet 42 norm constraints and offering hints when debugging synchronization edge cases. All core logic—including the deadlock prevention strategy, EDF scheduler implementation, priority queue design, and thread synchronization architecture—was independently developed and tested. AI served as a supplementary tool for syntax checks and alternative approach suggestions.
+- **AI Usage:** AI tools were used occasionally to support the learning process, such as finding materials, exploring ideas, and thinking about edge cases.
+All core parts of the project were implemented independently.ns.
