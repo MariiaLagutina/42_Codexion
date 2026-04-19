@@ -6,35 +6,11 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 11:57:48 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/14 14:56:20 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/19 16:05:10 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
-
-static int	is_valid_number(const char *str, int allow_negative)
-{
-	int	i;
-
-	i = 0;
-	if (!str || !str[0])
-		return (0);
-	if (str[0] == '-')
-	{
-		if (!allow_negative)
-			return (0);
-		i = 1;
-	}
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 static int	parse_scheduler(char *arg, t_scheduler *scheduler)
 {
@@ -61,40 +37,43 @@ static int	validate_values(t_sim *sim)
 	return (0);
 }
 
+static int	parse_int_arg(const char *arg, int *out)
+{
+	long	val;
+
+	if (!ft_strtol(arg, &val))
+		return (1);
+	if (val > INT_MAX)
+		return (1);
+	*out = (int)val;
+	return (0);
+}
+
 static int	parse_numbers(t_sim *sim, char **argv)
 {
-	sim->number_of_coders = atoi(argv[1]);
-	sim->time_to_burnout = atoi(argv[2]);
-	sim->time_to_compile = atoi(argv[3]);
-	sim->time_to_debug = atoi(argv[4]);
-	sim->time_to_refactor = atoi(argv[5]);
-	sim->required_compiles = atoi(argv[6]);
-	sim->dongle_cooldown = atoi(argv[7]);
+	if (parse_int_arg(argv[1], &sim->number_of_coders))
+		return (1);
+	if (!ft_strtol(argv[2], &sim->time_to_burnout))
+		return (1);
+	if (!ft_strtol(argv[3], &sim->time_to_compile))
+		return (1);
+	if (!ft_strtol(argv[4], &sim->time_to_debug))
+		return (1);
+	if (!ft_strtol(argv[5], &sim->time_to_refactor))
+		return (1);
+	if (parse_int_arg(argv[6], &sim->required_compiles))
+		return (1);
+	if (!ft_strtol(argv[7], &sim->dongle_cooldown))
+		return (1);
 	return (0);
 }
 
 int	parse_arguments(t_sim *sim, int argc, char **argv)
 {
-	int	i;
-
 	if (argc != 9)
 		return (1);
-	i = 1;
-	while (i <= 7)
-	{
-		if (i == 6)
-		{
-			if (!is_valid_number(argv[i], 1))
-				return (1);
-		}
-		else
-		{
-			if (!is_valid_number(argv[i], 0))
-				return (1);
-		}
-		i++;
-	}
-	parse_numbers(sim, argv);
+	if (parse_numbers(sim, argv))
+		return (1);
 	if (validate_values(sim))
 		return (1);
 	return (parse_scheduler(argv[8], &sim->scheduler));

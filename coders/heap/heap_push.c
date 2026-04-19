@@ -6,20 +6,11 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 14:18:12 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/28 14:16:38 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/19 21:25:23 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
-
-static void	swap_nodes(t_heap_node *a, t_heap_node *b)
-{
-	t_heap_node	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
 
 static void	heapify_up(t_heap *heap, int i)
 {
@@ -38,7 +29,6 @@ static void	heapify_up(t_heap *heap, int i)
 static int	resize_heap(t_heap *heap)
 {
 	t_heap_node	*new_nodes;
-	int			i;
 
 	if (heap->capacity == 0)
 		heap->capacity = 10;
@@ -47,12 +37,7 @@ static int	resize_heap(t_heap *heap)
 	new_nodes = malloc(sizeof(t_heap_node) * heap->capacity);
 	if (!new_nodes)
 		return (1);
-	i = 0;
-	while (i < heap->size)
-	{
-		new_nodes[i] = heap->nodes[i];
-		i++;
-	}
+	memcpy(new_nodes, heap->nodes, sizeof(t_heap_node) * heap->size);
 	free(heap->nodes);
 	heap->nodes = new_nodes;
 	return (0);

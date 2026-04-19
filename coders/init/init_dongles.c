@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 12:13:44 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/06 21:48:43 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/19 21:24:03 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ static int	init_dongle_mutex(t_dongle *dongle)
 {
 	if (pthread_mutex_init(&dongle->mutex, NULL))
 		return (1);
+	dongle->mutex_init = 1;
 	if (pthread_cond_init(&dongle->cond, NULL))
 	{
 		pthread_mutex_destroy(&dongle->mutex);
+		dongle->mutex_init = 0;
 		return (1);
 	}
+	dongle->cond_init = 1;
 	return (0);
 }
 

@@ -6,13 +6,13 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 14:18:51 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/28 14:16:56 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/19 19:06:08 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-static void	swap_nodes(t_heap_node *a, t_heap_node *b)
+void	swap_nodes(t_heap_node *a, t_heap_node *b)
 {
 	t_heap_node	tmp;
 

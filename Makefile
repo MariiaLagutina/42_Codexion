@@ -7,6 +7,7 @@ SRCS		=	coders/main.c \
 			coders/parser/parse_args.c \
 			coders/init/init_coders.c \
 			coders/init/init_dongles.c \
+			coders/init/init_resources.c\
 			coders/init/init_simulation.c \
 			coders/coder/coder_actions.c \
 			coders/coder/coder_cycle.c \
@@ -20,6 +21,7 @@ SRCS		=	coders/main.c \
 			coders/scheduler/scheduler.c \
 			coders/threads/join_threads.c \
 			coders/threads/start_threads.c \
+			coders/utils/utils.c \
 			coders/utils/logger.c \
 			coders/utils/sim_stop.c \
 			coders/utils/time_utils.c \

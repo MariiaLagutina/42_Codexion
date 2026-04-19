@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 12:18:57 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/06 15:56:17 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/19 21:23:47 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	init_coder_mutex(t_coder *coder)
 {
 	if (pthread_mutex_init(&coder->state_mutex, NULL))
 		return (1);
+	coder->mutex_init = 1;
 	return (0);
 }
 

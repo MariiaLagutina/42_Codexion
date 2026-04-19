@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_simulation.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/06 12:12:11 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/04/19 18:50:27 by mlagutin         ###   ########.fr       */
+/*   Created: 2026/04/19 15:48:36 by mlagutin          #+#    #+#             */
+/*   Updated: 2026/04/19 16:04:36 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-static void	init_basic_state(t_sim *sim)
+int	ft_strtol(const char *str, long *result)
 {
-	sim->stop = 0;
-	sim->start_time = get_time_ms();
-	sim->coders = NULL;
-	sim->dongles = NULL;
-	sim->log_mutex_init = 0;
-	sim->stop_mutex_init = 0;
-}
+	long	num;
+	int		i;
 
-int	init_simulation(t_sim *sim)
-{
-	init_basic_state(sim);
-	if (init_mutexes(sim))
-		return (1);
-	if (init_arrays(sim))
+	i = 0;
+	num = 0;
+	if (!str || !str[0])
+		return (0);
+	while (str[i])
 	{
-		destroy_mutexes(sim);
-		return (1);
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		if (num > (LONG_MAX - (str[i] - '0')) / 10)
+			return (0);
+		num = num * 10 + (str[i] - '0');
+		i++;
 	}
-	return (0);
+	*result = num;
+	return (1);
 }

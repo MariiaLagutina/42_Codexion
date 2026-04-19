@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 12:49:57 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/03/06 16:55:50 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/19 21:17:54 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static int	check_all_compiled(t_sim *sim)
 {
 	int	i;
 
-	if (sim->required_compiles == -1)
-		return (0);
 	i = 0;
 	while (i < sim->number_of_coders)
 	{
