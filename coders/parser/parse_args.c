@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 11:57:48 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/04/19 16:05:10 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/20 13:00:52 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ static int	parse_int_arg(const char *arg, int *out)
 	long	val;
 
 	if (!ft_strtol(arg, &val))
-		return (1);
-	if (val > INT_MAX)
-		return (1);
+		return (0);
+	if (val > INT_MAX || val < INT_MIN)
+		return (0);
 	*out = (int)val;
-	return (0);
+	return (1);
 }
 
 static int	parse_numbers(t_sim *sim, char **argv)
 {
-	if (parse_int_arg(argv[1], &sim->number_of_coders))
+	if (!parse_int_arg(argv[1], &sim->number_of_coders))
 		return (1);
 	if (!ft_strtol(argv[2], &sim->time_to_burnout))
 		return (1);
@@ -61,7 +61,7 @@ static int	parse_numbers(t_sim *sim, char **argv)
 		return (1);
 	if (!ft_strtol(argv[5], &sim->time_to_refactor))
 		return (1);
-	if (parse_int_arg(argv[6], &sim->required_compiles))
+	if (!parse_int_arg(argv[6], &sim->required_compiles))
 		return (1);
 	if (!ft_strtol(argv[7], &sim->dongle_cooldown))
 		return (1);
