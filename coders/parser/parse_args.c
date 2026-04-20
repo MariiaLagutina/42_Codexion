@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 11:57:48 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/04/20 13:00:52 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/20 13:31:13 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 static int	parse_scheduler(char *arg, t_scheduler *scheduler)
 {
 	if (!strcmp(arg, "fifo"))
+	{
 		*scheduler = FIFO;
-	else if (!strcmp(arg, "edf"))
-		*scheduler = EDF;
-	else
 		return (1);
+	}
+	else if (!strcmp(arg, "edf"))
+	{
+		*scheduler = EDF;
+		return (1);
+	}
 	return (0);
 }
 
@@ -76,5 +80,7 @@ int	parse_arguments(t_sim *sim, int argc, char **argv)
 		return (1);
 	if (validate_values(sim))
 		return (1);
-	return (parse_scheduler(argv[8], &sim->scheduler));
+	if (!parse_scheduler(argv[8], &sim->scheduler))
+		return (1);
+	return (0);
 }
