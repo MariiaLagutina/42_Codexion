@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 11:45:24 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/04/19 21:23:19 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/23 18:34:49 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
+# include <time.h>
 # include <unistd.h>
 
 typedef enum e_scheduler
@@ -99,6 +100,12 @@ long						get_time_ms(void);
 void						precise_sleep(t_sim *sim, long duration);
 int							simulation_stopped(t_sim *sim);
 
+/*
+** Global request counter for stable heap tie-breaking
+** Protected by per-dongle mutex during heap operations
+*/
+extern long					g_request_counter;
+
 void						log_action(t_coder *coder, const char *msg);
 void						log_death(t_coder *coder);
 
@@ -123,16 +130,18 @@ void						coder_compile(t_coder *coder);
 void						coder_debug(t_coder *coder);
 void						coder_refactor(t_coder *coder);
 
-void						take_dongles(t_coder *coder);
+int							take_dongles(t_coder *coder);
 void						release_dongles(t_coder *coder);
 
-void						scheduler_push(t_dongle *dongle, t_coder *coder);
+int							scheduler_push(t_dongle *dongle, t_coder *coder);
 t_coder						*scheduler_pop(t_dongle *dongle);
+int							scheduler_remove(t_dongle *dongle, t_coder *coder);
 
 void						swap_nodes(t_heap_node *a, t_heap_node *b);
-void						heap_push(t_heap *heap, t_coder *coder,
+int							heap_push(t_heap *heap, t_coder *coder,
 								long priority);
 t_coder						*heap_pop(t_heap *heap);
+int							heap_remove_coder(t_heap *heap, t_coder *coder);
 
 void						*monitor_routine(void *arg);
 int							check_burnout(t_coder *coder);
