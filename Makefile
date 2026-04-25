@@ -5,27 +5,29 @@ CFLAGS		=	-Wall -Wextra -Werror -pthread -I. -Icoders
 
 SRCS		=	coders/main.c \
 			coders/parser/parse_args.c \
+			coders/init/init_simulation.c \
+			coders/init/init_runtime.c \
 			coders/init/init_coders.c \
 			coders/init/init_dongles.c \
-			coders/init/init_resources.c\
-			coders/init/init_simulation.c \
+			coders/threads/threads_start.c \
+			coders/threads/threads_join.c \
+			coders/monitor/monitor_routine.c \
+			coders/monitor/monitor_burnout.c \
 			coders/coder/coder_actions.c \
 			coders/coder/coder_cycle.c \
 			coders/coder/coder_routine.c \
 			coders/dongles/dongle_release.c \
 			coders/dongles/dongle_take.c \
-			coders/heap/heap_pop.c \
+			coders/dongles/dongle_wait.c \
 			coders/heap/heap_push.c \
-			coders/monitor/check_burnout.c \
-			coders/monitor/monitor_loop.c \
+			coders/heap/heap_pop.c \
+			coders/heap/heap_remove.c \
 			coders/scheduler/scheduler.c \
-			coders/threads/join_threads.c \
-			coders/threads/start_threads.c \
-			coders/utils/utils.c \
 			coders/utils/logger.c \
-			coders/utils/sim_stop.c \
+			coders/utils/parse_numbers.c \
+			coders/utils/simulation_stop.c \
 			coders/utils/time_utils.c \
-			coders/cleanup.c
+			coders/init/cleanup_simulation.c
 
 OBJS		=	$(SRCS:.c=.o)
 

@@ -6,18 +6,11 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 11:57:20 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/04/23 18:34:53 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/25 12:22:29 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
-
-/*
-** Global request counter for stable heap tie-breaking.
-** Ensures FIFO order when multiple requests have identical priority.
-** Read in heap_push() under per-dongle mutex protection.
-*/
-long		g_request_counter = 0;
 
 static int	init_and_start(t_sim *sim, int argc, char **argv)
 {

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_burnout.c                                    :+:      :+:    :+:   */
+/*   monitor_burnout.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,10 +16,14 @@ int	check_burnout(t_coder *coder)
 {
 	long	now;
 	long	last_compile;
+	int		done;
 
 	pthread_mutex_lock(&coder->state_mutex);
+	done = (coder->compiles >= coder->sim->required_compiles);
 	last_compile = coder->last_compile_start;
 	pthread_mutex_unlock(&coder->state_mutex);
+	if (done)
+		return (0);
 	now = get_time_ms();
 	if (now - last_compile >= coder->sim->time_to_burnout)
 	{

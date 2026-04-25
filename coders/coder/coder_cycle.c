@@ -15,10 +15,10 @@
 void	coder_cycle(t_coder *coder)
 {
 	coder_compile(coder);
-	if (simulation_stopped(coder->sim))
+	if (simulation_stopped(coder->sim) || coder_finished(coder))
 		return ;
 	coder_debug(coder);
-	if (simulation_stopped(coder->sim))
+	if (simulation_stopped(coder->sim) || coder_finished(coder))
 		return ;
 	coder_refactor(coder);
 }

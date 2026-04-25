@@ -6,7 +6,7 @@
 /*   By: mlagutin <mlagutin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 11:45:24 by mlagutin          #+#    #+#             */
-/*   Updated: 2026/04/23 18:34:49 by mlagutin         ###   ########.fr       */
+/*   Updated: 2026/04/25 14:41:40 by mlagutin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/time.h>
 # include <time.h>
 # include <unistd.h>
 
@@ -100,12 +99,6 @@ long						get_time_ms(void);
 void						precise_sleep(t_sim *sim, long duration);
 int							simulation_stopped(t_sim *sim);
 
-/*
-** Global request counter for stable heap tie-breaking
-** Protected by per-dongle mutex during heap operations
-*/
-extern long					g_request_counter;
-
 void						log_action(t_coder *coder, const char *msg);
 void						log_death(t_coder *coder);
 
@@ -129,7 +122,10 @@ void						coder_cycle(t_coder *coder);
 void						coder_compile(t_coder *coder);
 void						coder_debug(t_coder *coder);
 void						coder_refactor(t_coder *coder);
+int							coder_finished(t_coder *coder);
 
+void						wait_cooldown(t_dongle *dongle);
+int							handle_queue_head(t_dongle *dongle, t_coder *coder);
 int							take_dongles(t_coder *coder);
 void						release_dongles(t_coder *coder);
 
@@ -142,6 +138,8 @@ int							heap_push(t_heap *heap, t_coder *coder,
 								long priority);
 t_coder						*heap_pop(t_heap *heap);
 int							heap_remove_coder(t_heap *heap, t_coder *coder);
+void						heapify_down_from(t_heap *heap, int i);
+void						heapify_up_from(t_heap *heap, int i);
 
 void						*monitor_routine(void *arg);
 int							check_burnout(t_coder *coder);

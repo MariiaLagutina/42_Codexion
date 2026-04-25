@@ -6,6 +6,9 @@ _This project has been created as part of the 42 curriculum by mlagutin._
 
 This project is a variation of Dijkstra's classic Dining Philosophers problem, extended with real-time scheduling constraints, dongle cooldowns, and precise burnout detection.
 
+The implementation uses no global variables: all shared state lives inside the
+simulation structure and is passed explicitly to worker threads.
+
 ## Instructions
 
 **Compilation:**
@@ -35,6 +38,10 @@ make
 ./codexion 3 310 200 200 200 1 0 fifo      # burnout timing case
 ./codexion 5 800 200 200 200 100 100 edf   # EDF + cooldown stress test
 ```
+
+**Stop conditions:**
+- the simulation ends immediately when one coder burns out
+- the simulation ends cleanly when every coder finishes the required number of compiles
 
 ## Blocking cases handled
 
@@ -77,7 +84,7 @@ Every mutex and condition variable has an `_init` flag. Cleanup only calls `pthr
 - Liu, C.L. and Layland, J.W. (1973) — "Scheduling Algorithms for Multiprogramming in a Hard-Real-Time Environment", EDF scheduling theory
 - POSIX Threads documentation — [pubs.opengroup.org](https://pubs.opengroup.org)
 - Downey, A. — "The Little Book of Semaphores" (free at greenteapress.com)
-- `man pthread_cond_wait`, `man pthread_mutex_init`, `man gettimeofday`
+- `man pthread_cond_wait`, `man pthread_mutex_init`, `man clock_gettime`
 
 ## AI Usage:
 AI tools were used occasionally to support the learning process, such as finding materials, exploring ideas, and thinking about edge cases.

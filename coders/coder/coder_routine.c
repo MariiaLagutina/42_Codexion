@@ -19,7 +19,7 @@ void	*coder_routine(void *arg)
 	coder = (t_coder *)arg;
 	if (coder->id % 2 == 0)
 		usleep(1000);
-	while (!simulation_stopped(coder->sim))
+	while (!simulation_stopped(coder->sim) && !coder_finished(coder))
 	{
 		coder_cycle(coder);
 	}
